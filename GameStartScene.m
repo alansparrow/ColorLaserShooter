@@ -13,24 +13,8 @@
 @implementation GameStartScene
 {
     CCPhysicsNode *_physicsNode;
-    CCNode *_cannon;
-    CCNode *_lineCeil;
-    CCNode *_lineFloor;
-    CCNode *_lineLeft;
-    CCNode *_lineRight;
     
-    CCLabelTTF *_scoreLabel;
-    
-    int _maxBalls;
-    BOOL _isBallsFired;
-    NSMutableArray *_balls;
-    
-    int _bulletNum;
-    int _colorID;
-    NSArray *_bulletNo;
-    NSArray *_bushNo;
     NSArray *_ballNo;
-    NSArray *_ballClass;
 
 }
 
@@ -48,7 +32,7 @@
     ball.position = ccp(0.5f, 0.55f);
     ball.scale = 2.0f;
     
-    [self addChild:ball];
+    [_physicsNode addChild:ball];
     
     AppDelegate * app = (((AppDelegate*) [UIApplication sharedApplication].delegate));
     

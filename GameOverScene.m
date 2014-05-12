@@ -35,13 +35,6 @@ NSString *const HasLaunchedOncePrefKey = @"HasLaunchedOnce";
         [[GCHelper sharedInstance] reportScore:[SharedObject sharedObject].highestScore
                               forLeaderboardID:[GCHelper sharedInstance].identifierHighestScore];
         
-        // load particle effect
-        CCParticleSystem *explosion = (CCParticleSystem *) [CCBReader load:@"HighAchievement"];
-        // make the particle effect clean itself up, once it is completed
-        explosion.autoRemoveOnFinish = TRUE;
-        // place the particle effect on the seals position
-        
-        
         NSLog(@"Inside 1");
     }
     

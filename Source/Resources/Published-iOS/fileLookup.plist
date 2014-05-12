@@ -6,6 +6,8 @@
 	<dict>
 		<key>Misc/Button.psd</key>
 		<string>Misc/Button.png</string>
+		<key>Misc/Clear.psd</key>
+		<string>Misc/Clear.png</string>
 		<key>Misc/GameOver.psd</key>
 		<string>Misc/GameOver.png</string>
 		<key>Misc/GameOverBanner.psd</key>

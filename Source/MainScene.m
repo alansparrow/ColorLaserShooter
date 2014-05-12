@@ -53,12 +53,14 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCNode *_lineFloor;
     CCNode *_lineLeft;
     CCNode *_lineRight;
+    CCSprite *_clearLabel;
     
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_targetLabel;
     
     int _maxBalls;
     BOOL _isBallsFired;
+
     NSMutableArray *_balls;
     
     int _bulletNum;
@@ -67,6 +69,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSArray *_bushNo;
     NSArray *_ballNo;
     NSArray *_ballClass;
+    
+    BOOL _isClear;
     
     
     CFURLRef		soundFileURLRef;
@@ -113,6 +117,8 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     _scoreLabel.string = [NSString stringWithFormat:@"%d", [[SharedObject sharedObject] points]];
 
+    // Not clear
+    _isClear = FALSE;
     
     // Random num of target ball
     [SharedObject randomTargetBalls];
@@ -307,10 +313,29 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     }
     [bullet removeFromParent];
     
-    if ([SharedObject sharedObject].finishedBalls == [SharedObject sharedObject].targetBalls) {
-        CCScene *scene = [CCBReader loadAsScene:@"GameStartScene"];
-        [[CCDirector sharedDirector] replaceScene:scene];
+    if ([SharedObject sharedObject].finishedBalls == [SharedObject sharedObject].targetBalls && !_isClear) {
+        _isClear = TRUE;
+        
+        [UIView animateWithDuration:2.0
+                         animations:^{
+                             _clearLabel.opacity = 0.f;
+                         }
+                         completion:^(BOOL finished) {
+                             [UIView beginAnimations:@"fade in" context:nil];
+                             [UIView setAnimationDuration:1.0];
+                             _clearLabel.opacity = 1.f;
+                             [UIView commitAnimations];
+                         }];
+        
+        [NSTimer scheduledTimerWithTimeInterval:2.5f target:self selector:@selector(goToGameStartScene:) userInfo:nil repeats:NO];
     }
+}
+
+- (void)goToGameStartScene:(id)sender
+{
+    CCScene *scene = [CCBReader loadAsScene:@"GameStartScene"];
+    [[CCDirector sharedDirector] replaceScene:scene];
+
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet wall:(CCNode *)wall
@@ -329,15 +354,32 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         NSLog(@"Game over");
         AudioServicesPlaySystemSound(soundFileObject_Die);
         
-        CCScene *scene = [CCBReader loadAsScene:@"GameOverScene"];
-        [[CCDirector sharedDirector] replaceScene:scene];
+        // load particle effect
+        CCParticleSystem *explosion = (CCParticleSystem *) [CCBReader load:@"Die"];
+        // make the particle effect clean itself up, once it is completed
+        explosion.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the seals position
+        explosion.position = ball.positionInPoints;
+        // add the particle effect to the same node the egg is on
+        [ball.parent addChild:explosion];
+        [ball removeFromParent];
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(goToGameOverScene:) userInfo:nil repeats:NO];
         
     } else {
-        [SharedObject sharedObject].points--;
-        _scoreLabel.string = [NSString stringWithFormat:@"%d", [[SharedObject sharedObject] points]];
+        if (!_isClear) {
+            [SharedObject sharedObject].points--;
+            _scoreLabel.string = [NSString stringWithFormat:@"%d", [[SharedObject sharedObject] points]];
+        }
     }
 
     [ball removeFromParent];
+}
+
+- (void)goToGameOverScene:(id)sender
+{
+    CCScene *scene = [CCBReader loadAsScene:@"GameOverScene"];
+    [[CCDirector sharedDirector] replaceScene:scene];
 }
 
 @end

@@ -363,9 +363,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.67058825492858887</real>
-							<real>0.88235300779342651</real>
-							<real>0.87450987100601196</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -570,9 +570,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.67058825492858887</real>
-							<real>0.88235300779342651</real>
-							<real>0.87450987100601196</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
