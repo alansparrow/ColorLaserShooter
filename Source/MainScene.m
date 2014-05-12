@@ -23,6 +23,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 {
     CCPhysicsNode *_physicsNode;
     CCNode *_cannon;
+    CCNode *_lineCeil;
+    CCNode *_lineFloor;
+    CCNode *_lineLeft;
+    CCNode *_lineRight;
     
     int _maxBalls;
     BOOL _isBallsFired;
@@ -43,6 +47,10 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _physicsNode.collisionDelegate = self;
     
     _cannon.zOrder = DrawingOrderCannon;
+    [_lineCeil physicsBody].collisionType = @"wall";
+    [_lineFloor physicsBody].collisionType = @"floorwall";
+    [_lineLeft physicsBody].collisionType = @"wall";
+    [_lineRight physicsBody].collisionType = @"wall";
     
     _bulletNo = @[@"RedBullet", @"GreenBullet", @"BlueBullet", @"YellowBullet", @"OrangeBullet", @"VioletBullet"];
     _bushNo = @[@"RedBush", @"GreenBush", @"BlueBush", @"YellowBush", @"OrangeBush", @"VioletBush"];
@@ -76,6 +84,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         
         
         CCNode *ball = [CCBReader load:_ballNo[_colorID]];
+        [ball physicsBody].collisionType = @"ball";
         ball.zOrder = DrawingOrderBall;
         ball.positionType = CCPositionTypeNormalized;
         ball.position = ccp(0.5f, 0.02f);
@@ -114,6 +123,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CGPoint unitVector = ccpNormalize(offset);
     
     CCNode *bullet = [CCBReader load:_bulletNo[_colorID]];
+    [bullet physicsBody].collisionType = @"bullet";
     bullet.zOrder = DrawingOrderBullet; // zOrder
     
     bullet.positionType =  CCPositionTypePoints;
@@ -161,6 +171,22 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCActionSequence *moveSequence = [CCActionSequence actionWithArray:@[r, bounce]];
     [_cannon runAction:moveSequence];
     
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet ball:(CCNode *)ball
+{
+    NSLog(@"Bing!!");
+    [bullet removeFromParent];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet wall:(CCNode *)wall
+{
+    [bullet removeFromParent];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)ball floorwall:(CCNode *)floorwall
+{
+    [ball removeFromParent];
 }
 
 @end

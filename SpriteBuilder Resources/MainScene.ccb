@@ -151,9 +151,9 @@
 						<key>displayName</key>
 						<string>line ceil</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_lineCeil</string>
 						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
+						<integer>1</integer>
 						<key>physicsBody</key>
 						<dict>
 							<key>affectedByGravity</key>
@@ -305,9 +305,9 @@
 						<key>displayName</key>
 						<string>line left</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_lineLeft</string>
 						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
+						<integer>1</integer>
 						<key>physicsBody</key>
 						<dict>
 							<key>affectedByGravity</key>
@@ -467,9 +467,9 @@
 						<key>displayName</key>
 						<string>line right</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_lineRight</string>
 						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
+						<integer>1</integer>
 						<key>physicsBody</key>
 						<dict>
 							<key>affectedByGravity</key>
@@ -629,9 +629,9 @@
 						<key>displayName</key>
 						<string>line floor</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_lineFloor</string>
 						<key>memberVarAssignmentType</key>
-						<integer>0</integer>
+						<integer>1</integer>
 						<key>physicsBody</key>
 						<dict>
 							<key>affectedByGravity</key>
@@ -770,6 +770,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -950,8 +952,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

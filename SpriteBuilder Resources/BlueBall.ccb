@@ -60,7 +60,7 @@
 			<key>cornerRadius</key>
 			<real>14.000030517578125</real>
 			<key>density</key>
-			<real>1</real>
+			<real>0.69999998807907104</real>
 			<key>dynamic</key>
 			<true/>
 			<key>elasticity</key>
@@ -150,6 +150,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
