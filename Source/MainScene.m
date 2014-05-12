@@ -10,8 +10,10 @@
 
 
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 typedef NS_ENUM(NSInteger, DrawingOrder) {
+    DrawingOrderBall,
     DrawingOrderBullet,
     DrawingOrderCannon,
     DrawingOrderBush
@@ -22,10 +24,15 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCPhysicsNode *_physicsNode;
     CCNode *_cannon;
     
+    int _maxBalls;
+    BOOL _isBallsFired;
+    NSMutableArray *_balls;
+    
     int _bulletNum;
     int _colorID;
     NSArray *_bulletNo;
     NSArray *_bushNo;
+    NSArray *_ballNo;
 }
 
 
@@ -39,6 +46,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     _bulletNo = @[@"RedBullet", @"GreenBullet", @"BlueBullet", @"YellowBullet", @"OrangeBullet", @"VioletBullet"];
     _bushNo = @[@"RedBush", @"GreenBush", @"BlueBush", @"YellowBush", @"OrangeBush", @"VioletBush"];
+    _ballNo = @[@"RedBall", @"GreenBall", @"BlueBall", @"YellowBall", @"OrangeBall", @"VioletBall"];
     
     // random color code for this game
     _colorID = arc4random_uniform(6);
@@ -52,17 +60,52 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     bush.scale = 0.5f;
     [_physicsNode addChild:bush];
     
+    // Fire the balls!
+    _isBallsFired = FALSE;
+    
+}
+
+- (void)fireBalls
+{
+    // 5 - 10
+    int numOfBalls = arc4random_uniform(6) + 5;
+    // 1 - 5;
+    int numOfTargetBalls = arc4random_uniform(numOfBalls) + 1;
+    
+    for (int i = 0; i <= numOfBalls; i++) {
+        
+        
+        CCNode *ball = [CCBReader load:_ballNo[_colorID]];
+        ball.zOrder = DrawingOrderBall;
+        ball.positionType = CCPositionTypeNormalized;
+        ball.position = ccp(0.5f, 0.02f);
+        
+        int shootAngle = arc4random_uniform(90) + 1;
+        // 45 - 135 degree
+        shootAngle += 45;
+        
+        CGPoint unitVector = ccpForAngle(DEGREES_TO_RADIANS(shootAngle));
+        [_physicsNode addChild:ball];
+        
+        [ball.physicsBody applyImpulse:ccpMult(unitVector, 1000.f)];
+
+    }
+    
 }
 
 - (void)update:(CCTime)delta
 {
-    
+    if (!_isBallsFired) {
+        [self fireBalls];
+        _isBallsFired = TRUE;
+    }
 }
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     [self rotateCannon:[touch locationInNode:self]];
     [self fireBullet:[touch locationInNode:self]];
+    
 }
 
 - (void)fireBullet:(CGPoint) touchPoint
