@@ -25,9 +25,26 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "MyiAd.h"
+#import "MyGAd.h"
 
-@interface AppController : CCAppDelegate
+@interface AppDelegate : CCAppDelegate
 {
+    MyiAd *mIAd;
+    MyGAd *mGAd;
+    
+    bool mIsBannerOn;
+    
+    bool mBannerOnTop;
 }
+
+@property(nonatomic, assign) bool isBannerOn;
+@property(nonatomic, assign) bool isBannerOnTop;
+@property (nonatomic) bool isMusic;
+
+-(void)showAdBanner;
+-(void)hideAdBanner;
+-(void)iAdBannerDidFail;
+-(void)GAdBannerDidFail;
 
 @end

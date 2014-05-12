@@ -7,6 +7,32 @@
 //
 
 #import "MainScene.h"
+#import "RedBall.h"
+#import "RedBullet.h"
+#import "RedBush.h"
+
+#import "BlueBall.h"
+#import "BlueBullet.h"
+#import "BlueBush.h"
+
+#import "YellowBall.h"
+#import "YellowBullet.h"
+#import "YellowBush.h"
+
+#import "OrangeBall.h"
+#import "OrangeBullet.h"
+#import "OrangeBush.h"
+
+#import "VioletBall.h"
+#import "VioletBullet.h"
+#import "VioletBush.h"
+
+#import "GreenBall.h"
+#import "GreenBullet.h"
+#import "GreenBush.h"
+
+#import "SharedObject.h"
+#import "AppDelegate.h"
 
 
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
@@ -28,6 +54,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCNode *_lineLeft;
     CCNode *_lineRight;
     
+    CCLabelTTF *_scoreLabel;
+    CCLabelTTF *_targetLabel;
+    
     int _maxBalls;
     BOOL _isBallsFired;
     NSMutableArray *_balls;
@@ -37,6 +66,17 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     NSArray *_bulletNo;
     NSArray *_bushNo;
     NSArray *_ballNo;
+    NSArray *_ballClass;
+    
+    
+    CFURLRef		soundFileURLRef;
+	SystemSoundID	soundFileObject_Shoot;
+  	SystemSoundID	soundFileObject_Die;
+   	SystemSoundID	soundFileObject_HitRightBall;
+   	SystemSoundID	soundFileObject_HitWrongBall;
+   	SystemSoundID	soundFileObject_BallShoot;
+    SystemSoundID	soundFileObject_Wrong;
+    SystemSoundID	soundFileObject_Right;
 }
 
 
@@ -55,9 +95,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     _bulletNo = @[@"RedBullet", @"GreenBullet", @"BlueBullet", @"YellowBullet", @"OrangeBullet", @"VioletBullet"];
     _bushNo = @[@"RedBush", @"GreenBush", @"BlueBush", @"YellowBush", @"OrangeBush", @"VioletBush"];
     _ballNo = @[@"RedBall", @"GreenBall", @"BlueBall", @"YellowBall", @"OrangeBall", @"VioletBall"];
-    
+    _ballClass = @[[RedBall class], [GreenBall class], [BlueBall class], [YellowBall class], [OrangeBall class], [VioletBall class]];
     // random color code for this game
-    _colorID = arc4random_uniform(6);
+    _colorID = [SharedObject sharedObject].colorID;
     
     // Load the bush
     CCNode *bush = [CCBReader load:_bushNo[_colorID]];
@@ -71,18 +111,80 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // Fire the balls!
     _isBallsFired = FALSE;
     
+    _scoreLabel.string = [NSString stringWithFormat:@"%d", [[SharedObject sharedObject] points]];
+
+    
+    // Random num of target ball
+    [SharedObject randomTargetBalls];
+    [SharedObject sharedObject].finishedBalls = 0;
+    _targetLabel.string = [NSString stringWithFormat:@"%d / %d", 0, [[SharedObject sharedObject] targetBalls]];
+    
+    // Load sounds
+    NSURL *laserShootSound = [[NSBundle mainBundle] URLForResource:@"lasershoot" withExtension:@"caf"];
+    // Store the URL as a CFURLRef instance
+    soundFileURLRef = (__bridge CFURLRef) laserShootSound;
+    // Create a system sound object representing the sound file
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject_Shoot);
+    
+    NSURL *ballShootSound = [[NSBundle mainBundle] URLForResource:@"ballshot" withExtension:@"caf"];
+    // Store the URL as a CFURLRef instance
+    soundFileURLRef = (__bridge CFURLRef) ballShootSound;
+    // Create a system sound object representing the sound file
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject_BallShoot);
+    
+    NSURL *dieSound = [[NSBundle mainBundle] URLForResource:@"uhoh" withExtension:@"caf"];
+    // Store the URL as a CFURLRef instance
+    soundFileURLRef = (__bridge CFURLRef) dieSound;
+    // Create a system sound object representing the sound file
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject_Die);
+    
+    NSURL *hitRightSound = [[NSBundle mainBundle] URLForResource:@"Ting" withExtension:@"caf"];
+    // Store the URL as a CFURLRef instance
+    soundFileURLRef = (__bridge CFURLRef) hitRightSound;
+    // Create a system sound object representing the sound file
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject_HitRightBall);
+    
+    NSURL *hitWrongSound = [[NSBundle mainBundle] URLForResource:@"thump" withExtension:@"caf"];
+    // Store the URL as a CFURLRef instance
+    soundFileURLRef = (__bridge CFURLRef) hitWrongSound;
+    // Create a system sound object representing the sound file
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject_HitWrongBall);
+    
+    
+    AppDelegate * app = (((AppDelegate*) [UIApplication sharedApplication].delegate));
+    
+    [app hideAdBanner];
+
 }
 
 - (void)fireBalls
 {
     // 5 - 10
-    int numOfBalls = arc4random_uniform(6) + 5;
-    // 1 - 5;
-    int numOfTargetBalls = arc4random_uniform(numOfBalls) + 1;
+    int numOfBalls = 6; //arc4random_uniform(6) + 5;
     
-    for (int i = 0; i <= numOfBalls; i++) {
+    for (int i = 0; i < numOfBalls; i++) {
         
         
+        CCNode *ball = [CCBReader load:_ballNo[i]];
+        [ball physicsBody].collisionType = @"ball";
+        ball.zOrder = DrawingOrderBall;
+        ball.positionType = CCPositionTypeNormalized;
+        ball.position = ccp(0.5f, 0.02f);
+        
+        int shootAngle = arc4random_uniform(90) + 1;
+        // 45 - 135 degree
+        shootAngle += 45;
+        
+        CGPoint unitVector = ccpForAngle(DEGREES_TO_RADIANS(shootAngle));
+        [_physicsNode addChild:ball];
+        
+        [ball.physicsBody applyImpulse:ccpMult(unitVector, 300.f)];
+        
+        AudioServicesPlaySystemSound(soundFileObject_BallShoot);
+    }
+    
+    // -1 for the default ball
+    for (int i = 0; i < [SharedObject sharedObject].targetBalls-1; i++) {
         CCNode *ball = [CCBReader load:_ballNo[_colorID]];
         [ball physicsBody].collisionType = @"ball";
         ball.zOrder = DrawingOrderBall;
@@ -96,9 +198,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         CGPoint unitVector = ccpForAngle(DEGREES_TO_RADIANS(shootAngle));
         [_physicsNode addChild:ball];
         
-        [ball.physicsBody applyImpulse:ccpMult(unitVector, 1000.f)];
-
+        [ball.physicsBody applyImpulse:ccpMult(unitVector, 300.f)];
+        
+        AudioServicesPlaySystemSound(soundFileObject_BallShoot);
     }
+    
     
 }
 
@@ -142,7 +246,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     bullet.scaleY = 0.3f;
     [_physicsNode addChild:bullet];
     
-    [bullet.physicsBody applyImpulse:ccpMult(unitVector, 1000.f)];
+    [bullet.physicsBody applyImpulse:ccpMult(unitVector, 1200.f)];
+    
+    AudioServicesPlaySystemSound(soundFileObject_Shoot);
 }
 
 - (void)rotateCannon:(CGPoint) touchPoint
@@ -176,7 +282,35 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet ball:(CCNode *)ball
 {
     NSLog(@"Bing!!");
+    if ([ball isKindOfClass:_ballClass[_colorID]]) {
+        NSLog(@"True");
+        
+        // load particle effect
+        CCParticleSystem *explosion = (CCParticleSystem *) [CCBReader load:@"Bang"];
+        // make the particle effect clean itself up, once it is completed
+        explosion.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the seals position
+        explosion.position = ball.positionInPoints;
+        // add the particle effect to the same node the egg is on
+        [ball.parent addChild:explosion];
+        [ball removeFromParent];
+        
+        AudioServicesPlaySystemSound(soundFileObject_HitRightBall);
+        
+        [SharedObject sharedObject].points += 2;
+        [SharedObject sharedObject].finishedBalls += 1;
+        NSLog(@"Finished balls: %d", [SharedObject sharedObject].finishedBalls);
+        _scoreLabel.string = [NSString stringWithFormat:@"%d", [[SharedObject sharedObject] points]];
+        _targetLabel.string = [NSString stringWithFormat:@"%d / %d", [SharedObject sharedObject].finishedBalls, [[SharedObject sharedObject] targetBalls]];
+    } else {
+        AudioServicesPlaySystemSound(soundFileObject_HitWrongBall);
+    }
     [bullet removeFromParent];
+    
+    if ([SharedObject sharedObject].finishedBalls == [SharedObject sharedObject].targetBalls) {
+        CCScene *scene = [CCBReader loadAsScene:@"GameStartScene"];
+        [[CCDirector sharedDirector] replaceScene:scene];
+    }
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet wall:(CCNode *)wall
@@ -184,8 +318,25 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     [bullet removeFromParent];
 }
 
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair bullet:(CCNode *)bullet floorwall:(CCNode *)floorwall
+{
+    [bullet removeFromParent];
+}
+
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)ball floorwall:(CCNode *)floorwall
 {
+    if ([ball isKindOfClass:_ballClass[_colorID]]) {
+        NSLog(@"Game over");
+        AudioServicesPlaySystemSound(soundFileObject_Die);
+        
+        CCScene *scene = [CCBReader loadAsScene:@"GameOverScene"];
+        [[CCDirector sharedDirector] replaceScene:scene];
+        
+    } else {
+        [SharedObject sharedObject].points--;
+        _scoreLabel.string = [NSString stringWithFormat:@"%d", [[SharedObject sharedObject] points]];
+    }
+
     [ball removeFromParent];
 }
 

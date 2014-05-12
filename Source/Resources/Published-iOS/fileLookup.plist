@@ -3,7 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>filenames</key>
-	<dict/>
+	<dict>
+		<key>Misc/Button.psd</key>
+		<string>Misc/Button.png</string>
+		<key>Misc/GameOver.psd</key>
+		<string>Misc/GameOver.png</string>
+		<key>Misc/GameOverBanner.psd</key>
+		<string>Misc/GameOverBanner.png</string>
+		<key>Misc/GameTitle.psd</key>
+		<string>Misc/GameTitle.png</string>
+		<key>Misc/Sounds/Laser Blasts-SoundBible.com-108608437.wav</key>
+		<string>Misc/Sounds/Laser Blasts-SoundBible.com-108608437.caf</string>
+		<key>Misc/Sounds/PopRight.wav</key>
+		<string>Misc/Sounds/PopRight.caf</string>
+		<key>Misc/Sounds/Sniper_Rifle-Kibblesbob-2053709564.wav</key>
+		<string>Misc/Sounds/Sniper_Rifle-Kibblesbob-2053709564.caf</string>
+		<key>Misc/Sounds/Ting.wav</key>
+		<string>Misc/Sounds/Ting.caf</string>
+		<key>Misc/Sounds/Uh Oh Baby-SoundBible.com-1858856676.wav</key>
+		<string>Misc/Sounds/Uh Oh Baby-SoundBible.com-1858856676.caf</string>
+		<key>Misc/Sounds/ploop.wav</key>
+		<string>Misc/Sounds/ploop.caf</string>
+		<key>Misc/Sounds/pop.wav</key>
+		<string>Misc/Sounds/pop.caf</string>
+		<key>Misc/Sounds/thump.wav</key>
+		<string>Misc/Sounds/thump.caf</string>
+		<key>Misc/icon-color shooter.psd</key>
+		<string>Misc/icon-color shooter.png</string>
+	</dict>
 	<key>metadata</key>
 	<dict>
 		<key>version</key>
