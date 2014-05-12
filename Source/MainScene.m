@@ -13,7 +13,8 @@
 
 typedef NS_ENUM(NSInteger, DrawingOrder) {
     DrawingOrderBullet,
-    DrawingOrderCannon
+    DrawingOrderCannon,
+    DrawingOrderBush
 };
 
 @implementation MainScene
@@ -22,7 +23,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CCNode *_cannon;
     
     int _bulletNum;
-    NSArray *_colorNo;
+    int _colorID;
+    NSArray *_bulletNo;
+    NSArray *_bushNo;
 }
 
 
@@ -34,7 +37,21 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     _cannon.zOrder = DrawingOrderCannon;
     
-    _colorNo = @[@"RedBullet", @"GreenBullet", @"BlueBullet", @"YellowBullet", @"OrangeBullet", @"VioletBullet"];
+    _bulletNo = @[@"RedBullet", @"GreenBullet", @"BlueBullet", @"YellowBullet", @"OrangeBullet", @"VioletBullet"];
+    _bushNo = @[@"RedBush", @"GreenBush", @"BlueBush", @"YellowBush", @"OrangeBush", @"VioletBush"];
+    
+    // random color code for this game
+    _colorID = arc4random_uniform(6);
+    
+    // Load the bush
+    CCNode *bush = [CCBReader load:_bushNo[_colorID]];
+    bush.zOrder = DrawingOrderBush;
+    bush.positionType = CCPositionTypeNormalized;
+    NSLog(@"%f %f", _cannon.positionInPoints.x, _cannon.positionInPoints.y);
+    bush.position = ccp(0.5f, 0.02f);
+    bush.scale = 0.5f;
+    [_physicsNode addChild:bush];
+    
 }
 
 - (void)update:(CCTime)delta
@@ -53,8 +70,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     CGPoint offset = ccpSub(touchPoint, _cannon.positionInPoints);
     CGPoint unitVector = ccpNormalize(offset);
     
-    int i = arc4random_uniform(6);
-    CCNode *bullet = [CCBReader load:_colorNo[i]];
+    CCNode *bullet = [CCBReader load:_bulletNo[_colorID]];
     bullet.zOrder = DrawingOrderBullet; // zOrder
     
     bullet.positionType =  CCPositionTypePoints;

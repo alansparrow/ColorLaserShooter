@@ -48,6 +48,12 @@
 		D82CC8D51920D7BE0048D06A /* VioletBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = D82CC8CD1920D7BE0048D06A /* VioletBullet.m */; };
 		D82CC8D61920D7BE0048D06A /* YellowBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = D82CC8CF1920D7BE0048D06A /* YellowBullet.m */; };
 		D82CC8D71920D7BE0048D06A /* BlueBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = D82CC8D11920D7BE0048D06A /* BlueBullet.m */; };
+		D8665D051920DD780016A2DE /* BlueBush.m in Sources */ = {isa = PBXBuildFile; fileRef = D8665D041920DD780016A2DE /* BlueBush.m */; };
+		D8665D081920DD830016A2DE /* GreenBush.m in Sources */ = {isa = PBXBuildFile; fileRef = D8665D071920DD830016A2DE /* GreenBush.m */; };
+		D8665D0B1920DD8A0016A2DE /* RedBush.m in Sources */ = {isa = PBXBuildFile; fileRef = D8665D0A1920DD8A0016A2DE /* RedBush.m */; };
+		D8665D0E1920DD940016A2DE /* YellowBush.m in Sources */ = {isa = PBXBuildFile; fileRef = D8665D0D1920DD940016A2DE /* YellowBush.m */; };
+		D8665D111920DD9D0016A2DE /* VioletBush.m in Sources */ = {isa = PBXBuildFile; fileRef = D8665D101920DD9D0016A2DE /* VioletBush.m */; };
+		D8665D141920DDA40016A2DE /* OrangeBush.m in Sources */ = {isa = PBXBuildFile; fileRef = D8665D131920DDA40016A2DE /* OrangeBush.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +132,18 @@
 		D82CC8CF1920D7BE0048D06A /* YellowBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YellowBullet.m; sourceTree = "<group>"; };
 		D82CC8D01920D7BE0048D06A /* BlueBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBullet.h; sourceTree = "<group>"; };
 		D82CC8D11920D7BE0048D06A /* BlueBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBullet.m; sourceTree = "<group>"; };
+		D8665D031920DD780016A2DE /* BlueBush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueBush.h; sourceTree = "<group>"; };
+		D8665D041920DD780016A2DE /* BlueBush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueBush.m; sourceTree = "<group>"; };
+		D8665D061920DD830016A2DE /* GreenBush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreenBush.h; sourceTree = "<group>"; };
+		D8665D071920DD830016A2DE /* GreenBush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreenBush.m; sourceTree = "<group>"; };
+		D8665D091920DD8A0016A2DE /* RedBush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedBush.h; sourceTree = "<group>"; };
+		D8665D0A1920DD8A0016A2DE /* RedBush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedBush.m; sourceTree = "<group>"; };
+		D8665D0C1920DD940016A2DE /* YellowBush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YellowBush.h; sourceTree = "<group>"; };
+		D8665D0D1920DD940016A2DE /* YellowBush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YellowBush.m; sourceTree = "<group>"; };
+		D8665D0F1920DD9D0016A2DE /* VioletBush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VioletBush.h; sourceTree = "<group>"; };
+		D8665D101920DD9D0016A2DE /* VioletBush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VioletBush.m; sourceTree = "<group>"; };
+		D8665D121920DDA40016A2DE /* OrangeBush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrangeBush.h; sourceTree = "<group>"; };
+		D8665D131920DDA40016A2DE /* OrangeBush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrangeBush.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +179,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D8665D011920DD650016A2DE /* Bush */,
 				D82CC8B31920D7AC0048D06A /* Bullet */,
 				D82CC8B11920D7A50048D06A /* Ball */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
@@ -295,6 +314,25 @@
 			name = Bullet;
 			sourceTree = "<group>";
 		};
+		D8665D011920DD650016A2DE /* Bush */ = {
+			isa = PBXGroup;
+			children = (
+				D8665D031920DD780016A2DE /* BlueBush.h */,
+				D8665D041920DD780016A2DE /* BlueBush.m */,
+				D8665D061920DD830016A2DE /* GreenBush.h */,
+				D8665D071920DD830016A2DE /* GreenBush.m */,
+				D8665D091920DD8A0016A2DE /* RedBush.h */,
+				D8665D0A1920DD8A0016A2DE /* RedBush.m */,
+				D8665D0C1920DD940016A2DE /* YellowBush.h */,
+				D8665D0D1920DD940016A2DE /* YellowBush.m */,
+				D8665D0F1920DD9D0016A2DE /* VioletBush.h */,
+				D8665D101920DD9D0016A2DE /* VioletBush.m */,
+				D8665D121920DDA40016A2DE /* OrangeBush.h */,
+				D8665D131920DDA40016A2DE /* OrangeBush.m */,
+			);
+			name = Bush;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -421,16 +459,22 @@
 				D82CC8C01920D7B80048D06A /* BlueBall.m in Sources */,
 				D82CC8C31920D7B80048D06A /* VioletBall.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				D8665D081920DD830016A2DE /* GreenBush.m in Sources */,
 				D82CC8C21920D7B80048D06A /* RedBall.m in Sources */,
 				D82CC8D41920D7BE0048D06A /* RedBullet.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				D82CC8D61920D7BE0048D06A /* YellowBullet.m in Sources */,
 				D82CC8D31920D7BE0048D06A /* OrangeBullet.m in Sources */,
+				D8665D0E1920DD940016A2DE /* YellowBush.m in Sources */,
+				D8665D111920DD9D0016A2DE /* VioletBush.m in Sources */,
 				D82CC8C11920D7B80048D06A /* GreenBall.m in Sources */,
 				D82CC8D21920D7BE0048D06A /* GreenBullet.m in Sources */,
 				D82CC8C41920D7B80048D06A /* YellowBall.m in Sources */,
 				D82CC8D51920D7BE0048D06A /* VioletBullet.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				D8665D051920DD780016A2DE /* BlueBush.m in Sources */,
+				D8665D0B1920DD8A0016A2DE /* RedBush.m in Sources */,
+				D8665D141920DDA40016A2DE /* OrangeBush.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
