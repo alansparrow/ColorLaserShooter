@@ -65,7 +65,7 @@
 + (void)randomTargetBalls
 {
     SharedObject *sharedObject = [SharedObject sharedObject];
-    sharedObject.targetBalls = arc4random_uniform(6) + 3;
+    sharedObject.targetBalls = arc4random_uniform(6) + 4;
 }
 
 @end

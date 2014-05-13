@@ -18,7 +18,9 @@
 
 @implementation GameMenuScene
 {
+    CCPhysicsNode *_physicsNode;
     
+    NSArray *_ballNo;
 }
 
 - (void)didLoadFromCCB
@@ -28,6 +30,24 @@
     // Game Center
     [[GCHelper sharedInstance] authenticateLocalUser];
     [[GCHelper sharedInstance] setIdentifierHighestScore:GC_INDENTIFIER_HIGHEST_SCORE];
+    
+    
+    
+    _ballNo = @[@"RedBall", @"GreenBall", @"BlueBall", @"YellowBall", @"OrangeBall", @"VioletBall"];
+    
+    for (int i = 0; i < 6; i++) {
+        CCNode *ball = [CCBReader load:_ballNo[i]];
+        ball.positionType = CCPositionTypeNormalized;
+        ball.position = ccp(0.5f, 0.55f);
+        ball.scale = 1.5f;
+        
+        [_physicsNode addChild:ball];
+    }
+    
+    
+    
+
+    
     
     // Ads
     AppDelegate * app = (((AppDelegate*) [UIApplication sharedApplication].delegate));

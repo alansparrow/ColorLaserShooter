@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     
     int _maxBalls;
     BOOL _isBallsFired;
+    BOOL _isDead;
 
     NSMutableArray *_balls;
     
@@ -120,6 +121,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // Not clear
     _isClear = FALSE;
     
+    // Not Dead
+    _isDead = FALSE;
+    
+    //
+    _balls = [NSMutableArray array];
+    
     // Random num of target ball
     [SharedObject randomTargetBalls];
     [SharedObject sharedObject].finishedBalls = 0;
@@ -138,7 +145,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     // Create a system sound object representing the sound file
     AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject_BallShoot);
     
-    NSURL *dieSound = [[NSBundle mainBundle] URLForResource:@"uhoh" withExtension:@"caf"];
+    NSURL *dieSound = [[NSBundle mainBundle] URLForResource:@"NoDear" withExtension:@"caf"];
     // Store the URL as a CFURLRef instance
     soundFileURLRef = (__bridge CFURLRef) dieSound;
     // Create a system sound object representing the sound file
@@ -183,8 +190,9 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         
         CGPoint unitVector = ccpForAngle(DEGREES_TO_RADIANS(shootAngle));
         [_physicsNode addChild:ball];
+        [_balls addObject:ball];
         
-        [ball.physicsBody applyImpulse:ccpMult(unitVector, 300.f)];
+        [ball.physicsBody applyImpulse:ccpMult(unitVector, 400.f)];
         
         AudioServicesPlaySystemSound(soundFileObject_BallShoot);
     }
@@ -203,11 +211,40 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         
         CGPoint unitVector = ccpForAngle(DEGREES_TO_RADIANS(shootAngle));
         [_physicsNode addChild:ball];
+        [_balls addObject:ball];
         
-        [ball.physicsBody applyImpulse:ccpMult(unitVector, 300.f)];
+        [ball.physicsBody applyImpulse:ccpMult(unitVector, 600.f)];
         
         AudioServicesPlaySystemSound(soundFileObject_BallShoot);
     }
+    
+    
+    // More balls
+    for (int i = 0; i < numOfBalls; i++) {
+        
+        int yesOrNo = arc4random_uniform(2);
+        
+        if (yesOrNo && i != _colorID) {
+            CCNode *ball = [CCBReader load:_ballNo[i]];
+            [ball physicsBody].collisionType = @"ball";
+            ball.zOrder = DrawingOrderBall;
+            ball.positionType = CCPositionTypeNormalized;
+            ball.position = ccp(0.5f, 0.02f);
+            
+            int shootAngle = arc4random_uniform(90) + 1;
+            // 45 - 135 degree
+            shootAngle += 45;
+            
+            CGPoint unitVector = ccpForAngle(DEGREES_TO_RADIANS(shootAngle));
+            [_physicsNode addChild:ball];
+            [_balls addObject:ball];
+            
+            [ball.physicsBody applyImpulse:ccpMult(unitVector, 500.f)];
+            
+            AudioServicesPlaySystemSound(soundFileObject_BallShoot);
+        }
+    }
+
     
     
 }
@@ -299,6 +336,7 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         explosion.position = ball.positionInPoints;
         // add the particle effect to the same node the egg is on
         [ball.parent addChild:explosion];
+        [_balls removeObject:ball];
         [ball removeFromParent];
         
         AudioServicesPlaySystemSound(soundFileObject_HitRightBall);
@@ -350,8 +388,11 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)ball floorwall:(CCNode *)floorwall
 {
-    if ([ball isKindOfClass:_ballClass[_colorID]]) {
+    if ([ball isKindOfClass:_ballClass[_colorID]] && !_isDead) {
         NSLog(@"Game over");
+        
+        _isDead = TRUE;
+        
         AudioServicesPlaySystemSound(soundFileObject_Die);
         
         // load particle effect
@@ -362,9 +403,18 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
         explosion.position = ball.positionInPoints;
         // add the particle effect to the same node the egg is on
         [ball.parent addChild:explosion];
+        [_balls removeObject:ball];
         [ball removeFromParent];
         
-        [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(goToGameOverScene:) userInfo:nil repeats:NO];
+        /*
+        for (CCNode *ball in _balls) {
+            CGPoint unitVector = ccpNormalize(ccp(0.f, 1.f));
+            [ball.physicsBody applyImpulse:ccpMult(unitVector, 40)];
+        }
+         */
+
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.3f target:self selector:@selector(goToGameOverScene:) userInfo:nil repeats:NO];
         
     } else {
         if (!_isClear) {
@@ -378,6 +428,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 
 - (void)goToGameOverScene:(id)sender
 {
+    for (CCNode *ball in _balls) {
+        [ball removeFromParentAndCleanup:YES];
+    }
+    
+    [_balls removeAllObjects];
+    
     CCScene *scene = [CCBReader loadAsScene:@"GameOverScene"];
     [[CCDirector sharedDirector] replaceScene:scene];
 }

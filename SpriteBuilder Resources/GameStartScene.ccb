@@ -330,8 +330,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -448,7 +446,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>OK</string>
+							<string>Got it!</string>
 							<false/>
 						</array>
 					</dict>
@@ -471,7 +469,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>Misc/Button.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -642,6 +640,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

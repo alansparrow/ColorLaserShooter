@@ -19,6 +19,9 @@ NSString *const HasLaunchedOncePrefKey = @"HasLaunchedOnce";
 {
     CCLabelTTF *_highestScoreLabel;
     CCLabelTTF *_scoreLabel;
+    
+    CCButton *_OKButton;
+    CCButton *_shareButton;
 }
 
 - (void)didLoadFromCCB
@@ -38,6 +41,9 @@ NSString *const HasLaunchedOncePrefKey = @"HasLaunchedOnce";
         NSLog(@"Inside 1");
     }
     
+    [_OKButton setTarget:self selector:@selector(restart)];
+    [_shareButton setTarget:self selector:@selector(share)];
+    
     AppDelegate * app = (((AppDelegate*) [UIApplication sharedApplication].delegate));
     
     [app showAdBanner];
@@ -46,7 +52,7 @@ NSString *const HasLaunchedOncePrefKey = @"HasLaunchedOnce";
 - (void)share
 {
     NSLog(@"Share button pressed");
-    NSString *text = [NSString stringWithFormat:@"Color Laser Shooter: This game is so interesting!!! What is your highest score ^?^ #colorlasershooter"];
+    NSString *text = [NSString stringWithFormat:@"[%d]Color Laser Shooter: This game is so interesting!!! What is your highest score ^?^ #colorlasershooter", [SharedObject sharedObject].points];
     NSURL *url = [NSURL URLWithString:@"http://goo.gl/AstvdK"];
     NSArray *objectsToShare = @[text, url];
     

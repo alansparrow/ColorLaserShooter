@@ -16,6 +16,8 @@
 		<string>Misc/GameTitle.png</string>
 		<key>Misc/Sounds/Laser Blasts-SoundBible.com-108608437.wav</key>
 		<string>Misc/Sounds/Laser Blasts-SoundBible.com-108608437.caf</string>
+		<key>Misc/Sounds/NoDear.wav</key>
+		<string>Misc/Sounds/NoDear.caf</string>
 		<key>Misc/Sounds/PopRight.wav</key>
 		<string>Misc/Sounds/PopRight.caf</string>
 		<key>Misc/Sounds/Sniper_Rifle-Kibblesbob-2053709564.wav</key>
@@ -32,6 +34,10 @@
 		<string>Misc/Sounds/thump.caf</string>
 		<key>Misc/icon-color shooter.psd</key>
 		<string>Misc/icon-color shooter.png</string>
+		<key>Misc/icon/Default-Landscape~iPad.psd</key>
+		<string>Misc/icon/Default-Landscape~iPad.png</string>
+		<key>Misc/title.psd</key>
+		<string>Misc/title.png</string>
 	</dict>
 	<key>metadata</key>
 	<dict>

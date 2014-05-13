@@ -639,9 +639,9 @@
 				<key>displayName</key>
 				<string>CCButton</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_shareButton</string>
 				<key>memberVarAssignmentType</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>properties</key>
 				<array>
 					<dict>
@@ -697,8 +697,8 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>share</string>
-							<integer>1</integer>
+							<string></string>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -765,7 +765,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>Misc/Button.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -949,9 +949,9 @@
 				<key>displayName</key>
 				<string>CCButton</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_OKButton</string>
 				<key>memberVarAssignmentType</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>properties</key>
 				<array>
 					<dict>
@@ -1007,8 +1007,8 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>restart</string>
-							<integer>1</integer>
+							<string></string>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1075,7 +1075,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>Misc/Button.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1246,6 +1246,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
