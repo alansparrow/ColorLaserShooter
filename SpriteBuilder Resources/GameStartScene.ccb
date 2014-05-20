@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>8</integer>
+	<integer>10</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -37,7 +37,7 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>1</integer>
+				<integer>9</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -46,6 +46,8 @@
 				<string></string>
 				<key>displayName</key>
 				<string>GameOverBanner</string>
+				<key>hidden</key>
+				<true/>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -68,7 +70,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.44999998807907104</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -106,7 +108,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Images/GameOverBanner.png</string>
+							<string>Misc/GameOverBanner.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -157,7 +159,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.37999999523162842</real>
+							<real>0.33000001311302185</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -364,7 +366,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.80000001192092896</real>
+							<real>0.76999998092651367</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -640,8 +642,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -696,24 +696,24 @@
 									<real>0.0</real>
 								</array>
 								<array>
-									<real>20.999921798706055</real>
-									<real>12.423337936401367</real>
+									<real>5.1999917030334473</real>
+									<real>8.9400043487548828</real>
 								</array>
 								<array>
-									<real>157.66661071777344</real>
-									<real>4.090001106262207</real>
+									<real>161.20002746582031</real>
+									<real>1.1400038003921509</real>
 								</array>
 								<array>
-									<real>257.66665649414062</real>
-									<real>1.4233335256576538</real>
+									<real>257.20004272460938</real>
+									<real>0.420003741979599</real>
 								</array>
 								<array>
-									<real>351.83331298828125</real>
-									<real>4.1733345985412598</real>
+									<real>348.4000244140625</real>
+									<real>1.2600038051605225</real>
 								</array>
 								<array>
-									<real>471.00003051757812</real>
-									<real>11.923336982727051</real>
+									<real>514.00006103515625</real>
+									<real>9.4200038909912109</real>
 								</array>
 								<array>
 									<real>512</real>
@@ -728,17 +728,17 @@
 										<real>0.0</real>
 									</array>
 									<array>
-										<real>471.00003051757812</real>
-										<real>11.923336982727051</real>
+										<real>514.00006103515625</real>
+										<real>9.4200038909912109</real>
 									</array>
 									<array>
-										<real>351.83331298828125</real>
-										<real>4.1733345985412598</real>
+										<real>348.4000244140625</real>
+										<real>1.2600038051605225</real>
 									</array>
 								</array>
 								<array>
 									<array>
-										<real>259.9849853515625</real>
+										<real>262.40008544921875</real>
 										<real>0.0</real>
 									</array>
 									<array>
@@ -746,44 +746,44 @@
 										<real>0.0</real>
 									</array>
 									<array>
-										<real>351.83331298828125</real>
-										<real>4.1733345985412598</real>
+										<real>348.4000244140625</real>
+										<real>1.2600038051605225</real>
 									</array>
 									<array>
-										<real>257.66665649414062</real>
-										<real>1.4233335256576538</real>
-									</array>
-								</array>
-								<array>
-									<array>
-										<real>157.66661071777344</real>
-										<real>4.090001106262207</real>
-									</array>
-									<array>
-										<real>20.999921798706055</real>
-										<real>12.423337936401367</real>
-									</array>
-									<array>
-										<real>0.0</real>
-										<real>0.0</real>
+										<real>257.20004272460938</real>
+										<real>0.420003741979599</real>
 									</array>
 								</array>
 								<array>
 									<array>
+										<real>161.20002746582031</real>
+										<real>1.1400038003921509</real>
+									</array>
+									<array>
+										<real>5.1999917030334473</real>
+										<real>8.9400043487548828</real>
+									</array>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</array>
+								<array>
+									<array>
 										<real>0.0</real>
 										<real>0.0</real>
 									</array>
 									<array>
-										<real>259.9849853515625</real>
+										<real>262.40008544921875</real>
 										<real>0.0</real>
 									</array>
 									<array>
-										<real>257.66665649414062</real>
-										<real>1.4233335256576538</real>
+										<real>257.20004272460938</real>
+										<real>0.420003741979599</real>
 									</array>
 									<array>
-										<real>157.66661071777344</real>
-										<real>4.090001106262207</real>
+										<real>161.20002746582031</real>
+										<real>1.1400038003921509</real>
 									</array>
 								</array>
 							</array>
@@ -806,7 +806,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.44999998807907104</real>
+									<real>0.41999998688697815</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -869,6 +869,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

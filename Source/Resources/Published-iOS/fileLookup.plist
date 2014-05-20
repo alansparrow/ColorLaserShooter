@@ -36,8 +36,22 @@
 		<string>Misc/icon-color shooter.png</string>
 		<key>Misc/icon/Default-Landscape~iPad.psd</key>
 		<string>Misc/icon/Default-Landscape~iPad.png</string>
+		<key>Misc/ss/ss1.psd</key>
+		<string>Misc/ss/ss1.png</string>
+		<key>Misc/ss/ss2.psd</key>
+		<string>Misc/ss/ss2.png</string>
+		<key>Misc/ss/ss3.psd</key>
+		<string>Misc/ss/ss3.png</string>
+		<key>Misc/ss/ss4.psd</key>
+		<string>Misc/ss/ss4.png</string>
+		<key>Misc/ss/ss5.psd</key>
+		<string>Misc/ss/ss5.png</string>
 		<key>Misc/title.psd</key>
 		<string>Misc/title.png</string>
+		<key>icon.psd</key>
+		<string>icon.png</string>
+		<key>icon/icon.psd</key>
+		<string>icon/icon.png</string>
 	</dict>
 	<key>metadata</key>
 	<dict>

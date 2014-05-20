@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>12</integer>
+	<integer>14</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -126,7 +126,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>4</integer>
+				<integer>13</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -195,7 +195,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>Images/GameOverBanner.png</string>
+							<string>Misc/GameOverBanner.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1246,8 +1246,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
